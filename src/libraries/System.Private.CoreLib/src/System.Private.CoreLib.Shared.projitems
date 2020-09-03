@@ -29,17 +29,10 @@
   <ItemGroup>
     <ILLinkSubstitutionsXmls Include="$(ILLinkSharedDirectory)ILLink.Substitutions.Shared.xml" />
     <!-- TODO: Enable these substitutions files for more platforms once https://github.com/mono/linker/issues/1260 is fixed -->
-    <ILLinkSubstitutionsXmls Include="$(ILLinkSharedDirectory)ILLink.Substitutions.LittleEndian.xml"
-                             Condition="'$(Platform)' == 'wasm'" />
-
-    <ILLinkSubstitutionsXmls Include="$(ILLinkSharedDirectory)ILLink.Substitutions.32bit.xml"
-                             Condition="'$(Platform)' == 'wasm'" />
-
-    <ILLinkSubstitutionsXmls Include="$(ILLinkSharedDirectory)ILLink.Substitutions.NoArmIntrinsics.xml"
-                             Condition="'$(Platform)' == 'wasm'" />
-    <ILLinkSubstitutionsXmls Include="$(ILLinkSharedDirectory)ILLink.Substitutions.NoX86Intrinsics.xml"
-                             Condition="'$(Platform)' == 'wasm'" />
-
+    <ILLinkSubstitutionsXmls Include="$(ILLinkSharedDirectory)ILLink.Substitutions.LittleEndian.xml" Condition="'$(Platform)' == 'wasm'" />
+    <ILLinkSubstitutionsXmls Include="$(ILLinkSharedDirectory)ILLink.Substitutions.32bit.xml" Condition="'$(Platform)' == 'wasm'" />
+    <ILLinkSubstitutionsXmls Include="$(ILLinkSharedDirectory)ILLink.Substitutions.NoArmIntrinsics.xml" Condition="'$(Platform)' == 'wasm'" />
+    <ILLinkSubstitutionsXmls Include="$(ILLinkSharedDirectory)ILLink.Substitutions.NoX86Intrinsics.xml" Condition="'$(Platform)' == 'wasm'" />
     <ILLinkLinkAttributesXmls Include="$(ILLinkSharedDirectory)ILLink.LinkAttributes.Shared.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -431,8 +424,10 @@
     <Compile Include="$(MSBuildThisFileDirectory)System\MarshalByRefObject.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)System\Marvin.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)System\Marvin.OrdinalIgnoreCase.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)System\Math.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)System\MathF.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\Math\Math.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\MathF\MathF.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\MathF\MathF.Constants.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)System\MathF\MathF.Helpers.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)System\MemberAccessException.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)System\Memory.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)System\MemoryDebugView.cs" />

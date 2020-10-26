@@ -183,7 +183,7 @@ namespace System.Collections.Concurrent
                 }
 
                 // Lost a race. Spin a bit, then try again.
-                spinner.SpinOnce(sleep1Threshold: -1);
+                spinner.SpinOnce();
             }
         }
 
@@ -244,7 +244,7 @@ namespace System.Collections.Concurrent
                 }
 
                 // Lost a race. Spin a bit, then try again.
-                spinner.SpinOnce(sleep1Threshold: -1);
+                spinner.SpinOnce();
             }
         }
 
@@ -301,7 +301,7 @@ namespace System.Collections.Concurrent
                 }
 
                 // Lost a race. Spin a bit, then try again.
-                spinner.SpinOnce(sleep1Threshold: -1);
+                spinner.SpinOnce();
             }
         }
 

@@ -37,6 +37,8 @@ namespace System.Collections.Concurrent
         internal ConcurrentQueueSegment<T>? _nextSegment; // SOS's ThreadPool command depends on this name
 #pragma warning restore 0649
 
+        internal int _sleep1Threshold = Thread.OptimalMaxSpinWaitsPerSpinIteration;
+
         /// <summary>Creates the segment.</summary>
         /// <param name="boundedLength">
         /// The maximum number of elements the segment can contain.  Must be a power of 2.
@@ -183,7 +185,7 @@ namespace System.Collections.Concurrent
                 }
 
                 // Lost a race. Spin a bit, then try again.
-                spinner.SpinOnce(sleep1Threshold: -1);
+                spinner.SpinOnce(sleep1Threshold: _sleep1Threshold);
             }
         }
 
@@ -244,7 +246,7 @@ namespace System.Collections.Concurrent
                 }
 
                 // Lost a race. Spin a bit, then try again.
-                spinner.SpinOnce(sleep1Threshold: -1);
+                spinner.SpinOnce(sleep1Threshold: _sleep1Threshold);
             }
         }
 
@@ -301,7 +303,7 @@ namespace System.Collections.Concurrent
                 }
 
                 // Lost a race. Spin a bit, then try again.
-                spinner.SpinOnce(sleep1Threshold: -1);
+                spinner.SpinOnce(sleep1Threshold: _sleep1Threshold);
             }
         }
 

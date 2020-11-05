@@ -53,6 +53,7 @@ namespace System.Collections.Concurrent
 
         private volatile int _currentAdders;
         private const int COMPLETE_ADDING_ON_MASK = unchecked((int)0x80000000);
+        private const int Sleep1Threshold = 8;
 
         #region Properties
         /// <summary>Gets the bounded capacity of this <see cref="System.Collections.Concurrent.BlockingCollection{T}"/> instance.</summary>
@@ -468,7 +469,7 @@ namespace System.Collections.Concurrent
                         Debug.Assert((observedAdders + 1) <= (~COMPLETE_ADDING_ON_MASK), "The number of concurrent adders thread exceeded the maximum limit.");
                         break;
                     }
-                    spinner.SpinOnce(sleep1Threshold: -1);
+                    spinner.SpinOnce(Sleep1Threshold);
                 }
 
                 // This outer try/finally to workaround of repeating the decrement adders code 3 times, because we should decrement the adders if:
@@ -1505,7 +1506,7 @@ namespace System.Collections.Concurrent
                     CancelWaitingProducers();
                     return;
                 }
-                spinner.SpinOnce(sleep1Threshold: -1);
+                spinner.SpinOnce(Sleep1Threshold);
             }
         }
 

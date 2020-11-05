@@ -36,6 +36,8 @@ namespace System.Threading
         private readonly ManualResetEventSlim _event;   // An event used to manage blocking and signaling.
         private volatile bool _disposed; // Whether the latch has been disposed.
 
+        private const int Sleep1Threshold = 8;
+
         /// <summary>
         /// Initializes a new instance of <see cref="System.Threading.CountdownEvent"/> class with the
         /// specified count.
@@ -241,7 +243,7 @@ namespace System.Threading
                 }
 
                 // The CAS failed.  Spin briefly and try again.
-                spin.SpinOnce(sleep1Threshold: -1);
+                spin.SpinOnce(Sleep1Threshold);
             }
 
             // If we were the last to signal, set the event.
@@ -351,7 +353,7 @@ namespace System.Threading
                 }
 
                 // The CAS failed.  Spin briefly and try again.
-                spin.SpinOnce(sleep1Threshold: -1);
+                spin.SpinOnce(Sleep1Threshold);
             }
 
             return true;

@@ -59,6 +59,8 @@ namespace System.Threading
         private const int NumWaitersState_BitMask = unchecked((int)0x0007FFFF); // 0000 0000 0000 0111 1111 1111 1111 1111
         private const int NumWaitersState_ShiftCount = 0;
         private const int NumWaitersState_MaxValue = (1 << 19) - 1; // 512K-1
+
+        private const int Sleep1Threshold = 8;
         // ----------- //
 
         /// <summary>
@@ -516,7 +518,7 @@ namespace System.Threading
                 SpinWait spinner = default;
                 while (spinner.Count < spinCount)
                 {
-                    spinner.SpinOnce(sleep1Threshold: -1);
+                    spinner.SpinOnce(Sleep1Threshold);
 
                     if (IsSet)
                     {
@@ -686,7 +688,7 @@ namespace System.Threading
                     return;
                 }
 
-                sw.SpinOnce(sleep1Threshold: -1);
+                sw.SpinOnce(Sleep1Threshold);
             }
         }
 

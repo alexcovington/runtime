@@ -64,8 +64,6 @@ namespace System.Threading
         // No maximum constant
         private const int NO_MAXIMUM = int.MaxValue;
 
-        private const int Sleep1Threshold = 8;
-
         // Task in a linked list of asynchronous waiters
         private sealed class TaskNode : Task<bool>
         {
@@ -328,7 +326,7 @@ namespace System.Threading
                     SpinWait spinner = default;
                     while (spinner.Count < spinCount)
                     {
-                        spinner.SpinOnce(Sleep1Threshold);
+                        spinner.SpinOnce();
 
                         if (m_currentCount != 0)
                         {

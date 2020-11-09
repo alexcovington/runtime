@@ -60,8 +60,6 @@ namespace System.Collections.Concurrent
         private volatile Node? _head; // The stack is a singly linked list, and only remembers the head.
         private const int BACKOFF_MAX_YIELDS = 8; // Arbitrary number to cap backoff.
 
-        private const int Sleep1Threshold = 8;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="ConcurrentStack{T}"/>
         /// class.
@@ -385,7 +383,7 @@ namespace System.Collections.Concurrent
             // Keep trying to CAS the existing head with the new node until we succeed.
             do
             {
-                spin.SpinOnce(Sleep1Threshold);
+                spin.SpinOnce();
                 // Reread the head and link our new node.
                 tail._next = _head;
             }
@@ -646,7 +644,7 @@ namespace System.Collections.Concurrent
                 // We failed to CAS the new head.  Spin briefly and retry.
                 for (int i = 0; i < backoff; i++)
                 {
-                    spin.SpinOnce(Sleep1Threshold);
+                    spin.SpinOnce();
                 }
 
                 if (spin.NextSpinWillYield)

@@ -145,8 +145,6 @@ namespace System.Threading
         // This value is captured before calling the action and reset back to zero after it.
         private int _actionCallerID;
 
-        private const int Sleep1Threshold = 8;
-
         #region Properties
 
         /// <summary>
@@ -386,7 +384,7 @@ namespace System.Threading
                     }
                     break;
                 }
-                spinner.SpinOnce(Sleep1Threshold);
+                spinner.SpinOnce();
             }
             return newPhase;
         }
@@ -471,7 +469,7 @@ namespace System.Threading
                         break;
                     }
                 }
-                spinner.SpinOnce(Sleep1Threshold);
+                spinner.SpinOnce();
             }
         }
 
@@ -673,7 +671,7 @@ namespace System.Threading
                     break;
                 }
 
-                spinner.SpinOnce(Sleep1Threshold);
+                spinner.SpinOnce();
             }
 
             // ** Perform the real wait **
@@ -739,7 +737,7 @@ namespace System.Threading
                         else
                             return false;
                     }
-                    spinner.SpinOnce(Sleep1Threshold);
+                    spinner.SpinOnce();
                 }
             }
 

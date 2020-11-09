@@ -186,8 +186,6 @@ namespace System.Threading.Tasks
         // task. This is to be used by the debugger ONLY. Task in this dictionary represent current active tasks.
         private static Dictionary<int, Task>? s_currentActiveTasks;
 
-        private const int Sleep1Threshold = 8;
-
         // These methods are a way to access the dictionary both from this class and for other classes that also
         // activate dummy tasks. Specifically the AsyncTaskMethodBuilder and AsyncTaskMethodBuilder<>
         internal static bool AddToActiveTasks(Task task)
@@ -2891,7 +2889,7 @@ namespace System.Threading.Tasks
             SpinWait spinner = default;
             while (spinner.Count < spinCount)
             {
-                spinner.SpinOnce(Sleep1Threshold);
+                spinner.SpinOnce();
 
                 if (IsCompleted)
                 {

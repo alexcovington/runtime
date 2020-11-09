@@ -64,7 +64,7 @@ namespace System.Threading
         private volatile int _owner;
 
         // After how many yields, call Sleep(1)
-        private const int SLEEP_ONE_FREQUENCY = 8;
+        // private const int SLEEP_ONE_FREQUENCY = 8;
 
         // After how many yields, check the timeout
         private const int TIMEOUT_CHECK_FREQUENCY = 10;
@@ -354,7 +354,7 @@ namespace System.Threading
             }
             while (true)
             {
-                spinner.SpinOnce(SLEEP_ONE_FREQUENCY);
+                spinner.SpinOnce();
 
                 observedOwner = _owner;
                 if ((observedOwner & LOCK_ANONYMOUS_OWNED) == LOCK_UNOWNED)

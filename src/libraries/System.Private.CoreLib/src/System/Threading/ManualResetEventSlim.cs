@@ -60,7 +60,6 @@ namespace System.Threading
         private const int NumWaitersState_ShiftCount = 0;
         private const int NumWaitersState_MaxValue = (1 << 19) - 1; // 512K-1
 
-        private const int Sleep1Threshold = 8;
         // ----------- //
 
         /// <summary>
@@ -518,7 +517,7 @@ namespace System.Threading
                 SpinWait spinner = default;
                 while (spinner.Count < spinCount)
                 {
-                    spinner.SpinOnce(Sleep1Threshold);
+                    spinner.SpinOnce();
 
                     if (IsSet)
                     {
@@ -688,7 +687,7 @@ namespace System.Threading
                     return;
                 }
 
-                sw.SpinOnce(Sleep1Threshold);
+                sw.SpinOnce();
             }
         }
 
